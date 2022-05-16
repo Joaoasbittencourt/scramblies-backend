@@ -13,8 +13,5 @@
        (map (fn [[k v]] [k (mapper v)]))
        (into {})))
 
-(defn letters-freqs [word]
-  (frequencies (vec word)))
-
-(defn pos-or-0? [number]
-  (>= number 0))
+(defn vals-diff [map map2]
+  (merge-with + map (map-values #(* -1 %) map2)))

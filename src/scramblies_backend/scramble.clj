@@ -1,12 +1,8 @@
 (ns scramblies-backend.scramble
-  (:require [scramblies-backend.utils :refer [letters-freqs,
-                                              map-values,
-                                              pos-or-0?]]))
+  (:require
+   [scramblies-backend.utils :refer [vals-diff]]))
 
-(defn scramble? [scrambled target]
-  (every?
-   pos-or-0?
-   (vals (merge-with
-          +
-          (letters-freqs scrambled)
-          (map-values #(* -1 %) (letters-freqs target))))))
+(defn scramble? [input target]
+  (every? nat-int? (vals (vals-diff
+                          (frequencies input)
+                          (frequencies target)))))
